@@ -9,6 +9,15 @@
 #### Linux: Run it in Bottles or wine because it does not run properly natively for some reason.
 #### MacOS: Use wine
 
+Hotkeys:
+#### Ctrl+S = Save (Changeable in preferences)
+#### Ctrl+q = Exit (Changeable in preferences)
+#### Ctrl+I Emoji Picker (Cannot use system emoji picker for some reason, Changable in preferences)
+#### Ctlr+ + = Zoom in (Unchangeable)
+#### Ctrl+ - = Zoom Out (Unchangeable)
+
+![image](https://github.com/user-attachments/assets/7916025e-3884-47e0-8e00-980f63bbb3fd)
+
 # .
 
 #### Made in **Penguinmod.com**
