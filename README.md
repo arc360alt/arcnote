@@ -1,8 +1,8 @@
 ![ArcNote](https://github.com/user-attachments/assets/08447efd-c5a0-4ad8-99ed-f47eea018fa8)
 # Arcnote, A Simple text editor with the looks, and the bugs.
 
-#### [Old Penguinmod Version](https://github.com/arc360alt/arcnote/main/README.md#screenshots)
-#### [New Python Version](https://github.com/arc360alt/arcnote/main/README.md#how-to-run)
+#### [Old Penguinmod Version](https://github.com/arc360alt/arcnote/tree/main#screenshots)
+#### [New Python Version](https://github.com/arc360alt/arcnote/blob/main/README.md#how-to-run)
 
 # How to run:
 #### Windows: Run the EXE
