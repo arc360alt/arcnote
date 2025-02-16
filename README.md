@@ -16,6 +16,8 @@ Hotkeys:
 #### Ctlr+ + = Zoom in (Unchangeable)
 #### Ctrl+ - = Zoom Out (Unchangeable)
 
+Also this text editor only saves in a .arc format, basicly a .txt but diffrent in no ways except for the title
+
 ![image](https://github.com/user-attachments/assets/7916025e-3884-47e0-8e00-980f63bbb3fd)
 
 # .
