@@ -9,8 +9,8 @@ from appdirs import user_config_dir # Import user_config_dir
 # ---------------------------------------------------
 
 # Define application details for appdirs
-APP_NAME = "ArcEditor"
-APP_AUTHOR = "Arc" # Replace with your name/organization if desired
+APP_NAME = "ArkEditor"
+APP_AUTHOR = "Ark360" 
 
 # Construct the config file path using user_config_dir
 config_dir = user_config_dir(APP_NAME, APP_AUTHOR)
