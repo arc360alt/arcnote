@@ -4,6 +4,10 @@ import json
 import os
 from appdirs import user_config_dir # Import user_config_dir
 
+# ---------------------------------------------------
+# INSTALL APPDIRS OR ELSE THIS PROGRAM WILL NOT WORK
+# ---------------------------------------------------
+
 # Define application details for appdirs
 APP_NAME = "ArcEditor"
 APP_AUTHOR = "Arc" # Replace with your name/organization if desired
