@@ -5,9 +5,9 @@
 #### [New Python Version](https://github.com/arc360alt/arcnote/blob/main/README.md#how-to-run)
 
 # How to run:
-#### Windows: Run the EXE
-#### Linux: Run it in Bottles or wine because it does not run properly natively for some reason.
-#### MacOS: Use wine
+#### Windows: Download the python file and follow the instructions in the release notes
+#### Linux: Download the python file and follow the instructions in the release notes (you may need to load up a Python Virtual Enviroment though)
+#### MacOS: I do not know, Untested
 
 Hotkeys:
 #### Ctrl+S = Save (Changeable in preferences)
