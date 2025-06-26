@@ -4,7 +4,7 @@
 # How to run:
 #### Windows:
 ````
-pip install piside6
+pip install pyside6
 git clone -b ArkNote-Refresh --single-branch https://github.com/arc360alt/arcnote.git
 cd arcnote
 python arcnote.py
@@ -15,7 +15,7 @@ git clone -b ArkNote-Refresh --single-branch https://github.com/arc360alt/arcnot
 cd arcnote
 python3 -m venv venv
 source venv/bin/activate
-pip install piside6
+pip install pyside6
 python arcnote.py
 ````
 #### MacOS: 
