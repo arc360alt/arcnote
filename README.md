@@ -1,5 +1,5 @@
 ![ArcNote](https://github.com/user-attachments/assets/08447efd-c5a0-4ad8-99ed-f47eea018fa8)
-# Arcnote, A Simple text editor with the looks, and the bugs.
+# Arcnote, A Simple text editor with the looks.
 
 # How to run:
 #### Windows:
