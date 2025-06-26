@@ -1,0 +1,411 @@
+html, body {
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #fff;
+  background: #181a2a;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Extra bottom space OUTSIDE of content, always visible, even if content is < 100vh */
+.page-bottom-spacer {
+  width: 100vw;
+  height: 90px;
+  min-height: 90px;
+  flex-shrink: 0;
+}
+@media (max-width: 900px) {
+  .page-bottom-spacer {
+    height: 48px;
+    min-height: 48px;
+  }
+}
+
+/* ZOOM WRAP for scaling main content and keeping it centered */
+.zoom-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100vw;
+}
+.zoom-wrap > .content-square {
+  transform: scale(1.33);
+  transform-origin: top center;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+/* On small screens, remove zoom for usability */
+@media (max-width: 900px) {
+  .zoom-wrap > .content-square {
+    transform: none;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+}
+
+#blob-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.overlay-blur {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  top: 0; left: 0;
+  pointer-events: none;
+  backdrop-filter: blur(48px);
+  background: rgba(25, 32, 60, 0.08);
+}
+
+.background {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  z-index: 2;
+  /* Defensive bottom padding for extra space, in addition to the spacer */
+  padding-bottom: 32px;
+}
+@media (max-width: 900px) {
+  .background {
+    padding-bottom: 16px;
+  }
+}
+
+.content-square {
+  z-index: 2;
+  position: relative;
+  max-width: 900px;
+  background: rgba(31,34,56, 0.85);
+  border-radius: 22px;
+  box-shadow: 0 2px 32px 0 #000A, 0 0 0 1px #4a4a8a11;
+  padding: 0 0 32px 0;
+}
+
+.main-header {
+  padding: 32px 40px 0 40px;
+}
+.header-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+}
+.main-img-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 370px;
+  width: 100%;
+}
+.main-img {
+  border-radius: 8px;
+  box-shadow: 0 4px 24px 4px #0005;
+  background: transparent !important;
+  display: block;
+  width: 100%;
+  max-width: 370px;
+  height: auto;
+  object-fit: contain;
+}
+.header-right {
+  min-width: 250px;
+  max-width: 340px;
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.header-right h1 {
+  font-size: 2.8em;
+  font-weight: 800;
+  margin: 0;
+  margin-bottom: 0.15em;
+  letter-spacing: -2px;
+}
+.subtitle {
+  font-size: 1.25em;
+  font-weight: 500;
+  font-style: italic;
+  margin: 0 0 32px 0;
+}
+.download-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #4f64ff 0%, #7b4fff 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15em;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 32px;
+  box-shadow: 0 2px 16px 0 #4f64ff77, 0 0 0 1px #fff2;
+  cursor: pointer;
+  transition: transform 0.11s cubic-bezier(.8,1.8,.2,1), box-shadow 0.11s;
+  margin-bottom: 8px;
+}
+.download-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 32px 0 #4f64ff99;
+}
+.version-info {
+  margin: 0;
+  font-size: 1.05em;
+  color: #e7e9f9;
+  text-shadow: 0 2px 12px #0003;
+}
+.top-version {
+  margin-top: 7px;
+}
+
+.features-section {
+  margin-top: 40px;
+  padding: 0 20px;
+  text-align: center;
+}
+.features-section h2 {
+  font-size: 1.7em;
+  font-weight: 800;
+  margin-bottom: 34px;
+  margin-top: 0;
+  color: #fff;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 14px #0002;
+}
+.features-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 34px;
+  margin-bottom: 38px;
+}
+.feature {
+  background: rgba(40,42,64, 0.93);
+  border-radius: 10px;
+  min-width: 220px;
+  max-width: 250px;
+  flex: 1 1 200px;
+  margin: 0 6px;
+  box-shadow: 0 1.5px 8px 0 #0004;
+  padding: 18px 10px 18px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 
+    transform 0.16s cubic-bezier(.8,1.8,.2,1),
+    box-shadow 0.16s cubic-bezier(.8,1.8,.2,1),
+    background 0.16s cubic-bezier(.8,1.8,.2,1);
+}
+.feature:hover {
+  transform: scale(1.07);
+  background: rgba(70, 90, 160, 0.96);
+  box-shadow: 0 8px 32px 0 #4f64ff88, 0 1.5px 8px 0 #0004;
+  z-index: 10;
+}
+.feature img {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 7px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 12px 1px #0005;
+  background: #222;
+}
+.feature h3 {
+  font-size: 1.14em;
+  font-weight: 700;
+  margin: 0 0 7px 0;
+  color: #fff;
+}
+.feature p {
+  font-size: 1em;
+  font-weight: 400;
+  color: #e3e8fa;
+  margin: 0;
+}
+
+.screenshots-section {
+  margin: 48px 0 0 0;
+  text-align: center;
+}
+.screenshots-section h2 {
+  font-size: 1.5em;
+  font-weight: 800;
+  margin-bottom: 26px;
+  color: #fff;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 14px #0002;
+}
+.screenshots-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 26px;
+}
+.screenshot-img {
+  max-width: 410px;
+  width: 48vw;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px 4px #0005;
+  background: #222;
+  margin-bottom: 10px;
+  transition:
+    transform 0.16s cubic-bezier(.8,1.8,.2,1),
+    box-shadow 0.16s cubic-bezier(.8,1.8,.2,1),
+    background 0.16s cubic-bezier(.8,1.8,.2,1);
+}
+.screenshot-img:hover {
+  transform: scale(1.07);
+  background: rgba(70, 90, 160, 0.96);
+  box-shadow: 0 8px 32px 0 #4f64ff88, 0 1.5px 8px 0 #0004;
+  z-index: 10;
+}
+
+.install-section {
+  margin: 48px 0 0 0;
+  text-align: center;
+}
+.install-section h2 {
+  font-size: 1.5em;
+  font-weight: 800;
+  margin-bottom: 26px;
+  color: #fff;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 14px #0002;
+}
+.install-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+.install-block {
+  background: rgba(40,42,64, 0.93);
+  border-radius: 10px;
+  min-width: 220px;
+  max-width: 350px;
+  flex: 1 1 220px;
+  margin: 0 6px;
+  box-shadow: 0 1.5px 8px 0 #0004;
+  padding: 18px 16px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  transition:
+    transform 0.16s cubic-bezier(.8,1.8,.2,1),
+    box-shadow 0.16s cubic-bezier(.8,1.8,.2,1),
+    background 0.16s cubic-bezier(.8,1.8,.2,1);
+}
+.install-block:hover {
+  transform: scale(1.07);
+  background: rgba(70, 90, 160, 0.96);
+  box-shadow: 0 8px 32px 0 #4f64ff88, 0 1.5px 8px 0 #0004;
+  z-index: 10;
+}
+.install-block h3 {
+  font-size: 1.14em;
+  font-weight: 700;
+  margin: 0 0 7px 0;
+  color: #fff;
+}
+.copy-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: #22263b;
+  color: #afefff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 9px 3px 9px;
+  font-size: 1.09em;
+  cursor: pointer;
+  transition: background 0.14s;
+  z-index: 2;
+  box-shadow: 0 1px 6px 0 #0002;
+  opacity: 0.85;
+}
+.copy-btn:hover {
+  background: #2e3355;
+  opacity: 1;
+}
+.install-block pre {
+  width: 100%;
+  background: #22263b;
+  color: #afefff;
+  border-radius: 8px;
+  padding: 18px 0 12px 22px;
+  margin: 0 0 0 0;
+  font-family: "Fira Mono", "Consolas", monospace;
+  font-size: 1em;
+  overflow-x: auto;
+  text-align: left;
+  box-sizing: border-box;
+  border: none;
+  display: block;
+}
+.install-block code {
+  display: block;
+  text-align: left;
+  white-space: pre;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: #afefff;
+}
+
+@media (max-width: 1000px) {
+  .content-square {
+    max-width: 98vw;
+  }
+  .main-header {
+    padding-left: 8vw;
+    padding-right: 8vw;
+  }
+}
+@media (max-width: 720px) {
+  .header-flex, .features-flex, .screenshots-flex, .install-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+  .main-header {
+    padding: 18px 2vw 0 2vw;
+  }
+  .feature, .install-block {
+    max-width: 98vw;
+  }
+  .main-img {
+    width: 94vw;
+    max-width: 340px;
+  }
+  .screenshot-img {
+    max-width: 96vw;
+    width: 96vw;
+  }
+}
+
+/* Hide scrollbars for aesthetics */
+body, .content-square {
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar,
+.content-square::-webkit-scrollbar {
+  display: none;
+}
