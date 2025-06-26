@@ -84,9 +84,8 @@ class LineNumberArea(QWidget):
         height = self.editor.fontMetrics().height()
         while block.isValid() and top <= event.rect().bottom():
             if block.isVisible() and bottom >= event.rect().top():
-                number = str(block_number + 1)
                 painter.drawText(0, top, self.width() - 4, height,
-                                 Qt.AlignRight | Qt.AlignVCenter, number)
+                                 Qt.AlignRight | Qt.AlignVCenter, str(block_number + 1))
             block = block.next()
             top = bottom
             bottom = top + int(self.editor.blockBoundingRect(block).height())
@@ -106,6 +105,10 @@ class ArkTextEdit(QPlainTextEdit):
         self.highlight_current_line()
         self.textChanged.connect(self._on_text_changed)
         self._unsaved = False
+
+        # --- FIX: Disable wrap, enable horizontal scrollbar ---
+        self.setLineWrapMode(QPlainTextEdit.NoWrap)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
 
     def update_font(self):
         font = QFont(self.config["font_family"], self.config["font_size"])
@@ -132,6 +135,7 @@ class ArkTextEdit(QPlainTextEdit):
         cr = self.contentsRect()
         width = self.line_number_area.line_number_width()
         self.line_number_area.setGeometry(QRect(cr.left(), cr.top(), width, cr.height()))
+        self.line_number_area.update()
 
     def update_line_number_area_width(self, _):
         self.setViewportMargins(self.line_number_area.line_number_width(), 0, 0, 0)
@@ -232,9 +236,7 @@ class AboutDialog(QDialog):
         self.setWindowTitle("About ArkNotes")
         layout = QVBoxLayout(self)
 
-        # Show PNG image above the text
         image_label = QLabel()
-        # Use icon.png in the same directory as your script
         image_path = os.path.join(os.path.dirname(__file__), "icon.png")
         if os.path.exists(image_path):
             pixmap = QPixmap(image_path)
@@ -285,7 +287,6 @@ class MenuBarWidget(QWidget):
         self.file_menu.addAction(self.main_window.open_action)
         self.file_menu.addAction(self.main_window.save_action)
         self.file_menu.addAction(self.main_window.saveas_action)
-        # Add Exit action to File menu
         self.file_menu.addSeparator()
         self.file_menu.addAction(self.main_window.exit_action)
 
@@ -337,8 +338,6 @@ class ArkNotesMainWindow(QMainWindow):
         self.preferences_action.triggered.connect(self.open_preferences)
         self.about_action = QAction("About", self)
         self.about_action.triggered.connect(self.open_about)
-
-        # Add Exit QAction for File menu
         self.exit_action = QAction("Exit", self)
         self.exit_action.setShortcut(QKeySequence(self.config.get("exit_hotkey", "Ctrl+Q")))
         self.exit_action.triggered.connect(self.close)
