@@ -31,3 +31,5 @@ Also this text editor only saves in a .arc format, basicly a .txt but diffrent i
 
 ![image](https://github.com/user-attachments/assets/5464ee51-d4d0-4272-a6a9-a12819d39275)
 
+## Coming soon:
+<img width="1521" height="972" alt="image" src="https://github.com/user-attachments/assets/1545e2b7-8d59-4c66-ba76-235d63aa6875" />
